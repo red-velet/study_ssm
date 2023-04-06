@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="icu.chiou.dao.UserMapper">
+    <insert id="addUser" parameterType="icu.chiou.entity.User">
+        insert into user (id, username, password)
+        values (#{id}, #{username}, #{password})
+    </insert>
+    <insert id="insertUser" parameterType="icu.chiou.entity.User">
+        insert into user (id, username, password)
+        values (#{id}, #{name}, #{pwd})
+    </insert>
+
+    <insert id="insertUserParam" parameterType="icu.chiou.entity.User">
+        insert into user (id, username, password)
+        values (#{id}, #{name}, #{pwd})
+    </insert>
+    <update id="updateUser" parameterType="icu.chiou.entity.User">
+        update user
+        set username=#{username},
+            password=#{password}
+        where id = #{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+
+    <select id="selectList" resultType="icu.chiou.entity.User">
+        select id, `username`, `password`
+        from user
+    </select>
+
+    <select id="selectUserById" resultType="icu.chiou.entity.User" parameterType="int">
+        select id, username, password
+        from user
+        where id = ${id}
+    </select>
+
+    <select id="getByUserNameLikeMethod1" resultType="icu.chiou.entity.User">
+        select id, `username`, `password`
+        from user
+        where username like #{name}
+    </select>
+    <select id="getByUserNameLikeMethod2" resultType="icu.chiou.entity.User">
+        select id, `username`, `password`
+        from user
+        where username like "%"#{name}"%"
+    </select>
+    <select id="getByUserNameLikeMethod3" resultType="icu.chiou.entity.User">
+        select id, `username`, `password`
+        from user
+        where username like "%${name}%"
+    </select>
+    <select id="getUsersByParams" resultType="icu.chiou.entity.User">
+        select id, username, password
+        from user
+        where username = #{name}
+          and password = #{password}
+    </select>
+</mapper>

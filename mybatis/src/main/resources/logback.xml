@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--<property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss} %c [%thread] %-5level %msg%n"/>-->
+    <!--【格式】-输出的格式-->
+    <property name="pattern" value="%d{HH:mm:ss} %c [%thread] %-5level %msg%n"/>
+    <!--【目的地】-输出文件的destination-->
+    <property name="log_dir" value="D:/logs"/>
+
+    <!--【控制台输出配置】-输出到控制台的配置-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--日志输出目标-控制台-->
+        <target>System.out</target>
+        <!--日志格式配置-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--【文件输出配置】-输出到文件的配置-->
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <!--日志格式配置-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <!--日志输出路径-->
+        <file>${log_dir}/sql.log</file>
+    </appender>
+
+    <!--日志等级:
+        在这个配置中，level 属性设置了默认的日志级别为 ALL，也就是所有级别的日志都会被记录下来。
+        <appender-ref> 元素引用了名为 console 的 Appender，表示所有的日志输出都会被写入控制台。
+        这里的 console 可以是在配置文件中定义的任何一个 Appender，也可以是 Logback 内置的 Appender，例如 ConsoleAppender 或者 FileAppender。
+        需要注意的是，<root> 元素只能出现一次，且必须是整个配置文件的根元素。
+        如果你想要为某个具体的 Logger 配置日志级别和 Appender，可以使用 <logger> 元素来设置。
+    -->
+    <root level="ALL">
+        <appender-ref ref="console"/>
+    </root>
+
+    <!-- 该配置表示:
+        当MyBatis输出SQL语句的日志时，将会输出到控制台和文件中，
+        日志级别为 debug。
+        需要注意的是，如果你使用这个配置文件，你需要将其放置到类路径下的 logback.xml 或者 logback-test.xml 文件中，
+        以让 Logback 自动加载并使用该配置
+        -->
+    <logger name="mybatis.sql" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+</configuration>

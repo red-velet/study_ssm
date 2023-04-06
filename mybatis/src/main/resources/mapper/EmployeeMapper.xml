@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="icu.chiou.dao.EmployeeMapper">
+    <resultMap id="employeeMap" type="icu.chiou.entity.Employee">
+        <id column="eid" property="id"/>
+        <result column="ename" property="name"/>
+    </resultMap>
+
+
+    <select id="selectByDid" resultMap="employeeMap">
+        select id eid, name ename
+        from employee
+        where did = #{did}
+    </select>
+    <!--    <resultMap id="employeeMap" type="icu.chiou.entity.Employee">-->
+    <!--        <id column="id" property="id"/>-->
+    <!--        <result column="name" property="name"/>-->
+    <!--        <association property="dept" column="did" javaType="icu.chiou.entity.Dept"-->
+    <!--                     select="icu.chiou.dao.DeptMapper.selectById">-->
+    <!--            &lt;!&ndash;把对方要用的暴露出去后的参数的值&ndash;&gt;-->
+    <!--            <id column="id" property="id"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+
+    <!--    <sql id="sql">-->
+    <!--        `id`-->
+    <!--        ,`name`,`did`-->
+    <!--    </sql>-->
+
+
+    <!--    <select id="selectOneToOne" resultMap="employeeMap">-->
+    <!--        select-->
+    <!--        <include refid="sql"/>-->
+    <!--        from employee-->
+    <!--    </select>-->
+
+    <!--    <resultMap id="employeeMap2" type="icu.chiou.entity.Employee">-->
+    <!--        <id column="eid" property="id"/>-->
+    <!--        <result column="ename" property="name"/>-->
+    <!--        <association property="dept" column="did" javaType="icu.chiou.entity.Dept">-->
+    <!--            <id column="did" property="id"/>-->
+    <!--            <result column="dname" property="name"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+
+
+    <!--    <select id="selectOneToOne2" resultMap="employeeMap2">-->
+    <!--        select e.id eid, e.name ename, d.id did, d.name dname-->
+    <!--        from employee e-->
+    <!--                 left join dept d-->
+    <!--                           on d.id = e.did-->
+    <!--    </select>-->
+
+</mapper>
